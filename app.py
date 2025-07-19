@@ -15,31 +15,33 @@ def contains_japanese(text):
     return bool(re.search(r'[\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FAF]', text))
 
 # Function to generate PDF and display it with print dialog
-def display_pdf_with_print(pdf_data):
-    """Display PDF and automatically open print dialog"""
-    base64_pdf = base64.b64encode(pdf_data).decode('utf-8')
-    
-    pdf_display = f'''
-    <iframe src="data:application/pdf;base64,{base64_pdf}" 
-            width="700" height="1000" type="application/pdf"
-            id="pdf-frame"></iframe>
-    <script>
-        // Wait for PDF to load, then trigger print
-        setTimeout(function() {{
-            window.print();
-        }}, 1000);
-    </script>
-    '''
-    st.markdown(pdf_display, unsafe_allow_html=True)
+def display_pdf_with_print(pdf_data, filename="handwriting_practice.pdf"):
+    """Most reliable cross-browser approach"""
+    col1, col2, col3 = st.columns([1,2,1])
+    with col2:        
+        # Big, prominent download button
+        st.download_button(
+            label="📄 Download Your PDF",
+            data=pdf_data,
+            file_name=filename,
+            mime="application/pdf",
+            use_container_width=True,
+            type="primary"
+        )
+        
+        # Simple instructions
+        st.info("The PDF will download to your device and should open automatically in your browser or PDF reader.")
+
 
 # Button to generate PDF
-if st.button("Generate PDF"):
+if st.button("Generate PDF", type="primary"):
     if not sentences:
         st.error("Please enter at least one sentence.")
     elif not contains_japanese(sentences):
         st.error("No Japanese input detected. Please enter Japanese text.")
     else:
-        pdf_data = generate_pdf_from_string(sentences)
-        st.success(f"PDF generated successfully!")
-        display_pdf_with_print(pdf_data)
+        with st.spinner("Generating PDF..."):
+            pdf_data = generate_pdf_from_string(sentences)
+            st.success(f"🎉 Your PDF is ready!")
+            display_pdf_with_print(pdf_data)
 
