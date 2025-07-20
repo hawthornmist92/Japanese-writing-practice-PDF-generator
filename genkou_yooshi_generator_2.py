@@ -25,11 +25,11 @@ class GenkouYooshiGenerator:
         self.page_width, self.page_height = A4
         self.margin = 20 * mm
         self.grid_size = 15 * mm  # Standard genkō yōshi square size
-        self.font_size = 30       # Increase font size for better fit
+        self.font_size = 36       # Increase font size for better fit
         
         # Always use Japanese font from folder if not specified
         if not font_path:
-            font_path = str(Path(__file__).parent / "NotoSansJP-Regular.ttf")
+            font_path = str(Path(__file__).parent / "DFKyoKaSho-W4.ttf")
         if Path(font_path).exists():
             pdfmetrics.registerFont(TTFont('Japanese', font_path))
             self.font_name = 'Japanese'
@@ -101,8 +101,9 @@ class GenkouYooshiGenerator:
         # Clean up the text first
         text = re.sub(r'\s+', ' ', text)  # Normalize whitespace
         
-        # Split on common Japanese sentence endings
-        sentences = re.split(r'[。！？\n]', text)
+        # Split and keep punctuation (。！？)
+        sentences = re.findall(r'.+?[。！？]', text)
+
         
         # Clean and filter sentences
         cleaned_sentences = []
