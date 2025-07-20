@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""
-Genkō Yōshi Handwriting Practice Worksheet Generator
-Converts Japanese sentences from text files into handwriting practice worksheets.
-"""
+# """
+# Genkō Yōshi Handwriting Practice Worksheet Generator
+# Converts Japanese sentences from text files into handwriting practice worksheets.
+# """
 
 import re
 import argparse

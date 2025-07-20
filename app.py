@@ -1,5 +1,4 @@
 import streamlit as st
-import base64
 import re
 from genkou_yooshi_generator_2 import generate_pdf_from_string
 
@@ -32,7 +31,6 @@ def display_pdf_with_print(pdf_data, filename="handwriting_practice.pdf"):
         # Simple instructions
         st.info("The PDF will download to your device and should open automatically in your browser or PDF reader.")
 
-
 # Button to generate PDF
 if st.button("Generate PDF", type="primary"):
     if not sentences:
@@ -44,4 +42,3 @@ if st.button("Generate PDF", type="primary"):
             pdf_data = generate_pdf_from_string(sentences)
             st.success(f"🎉 Your PDF is ready!")
             display_pdf_with_print(pdf_data)
-
