@@ -24,8 +24,8 @@ class GenkouYooshiGenerator:
         """
         self.page_width, self.page_height = A4
         self.margin = 20 * mm
-        self.grid_size = 15 * mm  # Standard genkō yōshi square size
-        self.font_size = 36       # Increase font size for better fit
+        self.grid_size = 10 * mm  # Standard genkō yōshi square size
+        self.font_size = 24       # Increase font size for better fit
         
         # Always use Japanese font from folder if not specified
         if not font_path:
@@ -116,7 +116,7 @@ class GenkouYooshiGenerator:
     
     def create_worksheet(self, sentences, output_path, 
                         title="Japanese Handwriting Practice",
-                        rows_per_page=18):
+                        rows_per_page=30):
         """
         Create a genkō yōshi worksheet PDF.
         
