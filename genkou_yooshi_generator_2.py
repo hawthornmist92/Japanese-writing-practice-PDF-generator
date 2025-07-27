@@ -174,10 +174,16 @@ class GenkouYooshiGenerator:
         c.drawString(x, y, title)
     
     def _add_page_number(self, c, page_num):
-        """Add page number."""
-        c.setFont('Helvetica', 10)
+        """Add page number and footer."""
+        c.setFont('Helvetica', 8)
+        # Page number
         c.drawString(self.page_width - self.margin - 20 * mm, 
                     self.margin - 10 * mm, f"Page {page_num}")
+        # Footer
+        footer_text = "Created by @HawthornMist92"
+        x = self.margin
+        y = self.margin - 10 * mm
+        c.drawString(x, y, footer_text)
     
     def _add_sentence_to_grid(self, c, sentence, start_row, cols_per_row):
         """Add a sentence to the genkō yōshi grid."""
