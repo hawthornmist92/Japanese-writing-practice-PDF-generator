@@ -1,3 +1,3 @@
 streamlit
 reportlab
-streamlit-pdf
+streamlit-pdf-viewer==0.0.23
